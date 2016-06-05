@@ -1,0 +1,24 @@
+﻿@using SmartHouse_MVC.Models.Classes;
+@using SmartHouse_MVC.Helpers;
+@model IDictionary<int, Device>
+
+<p>
+    <hr />
+    @Html.ActionLink("Create New", "AddDevice", null, new { @class = "btn btn-default btn-block" })
+</p>
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+        @foreach (var item in Model)
+        {
+            if (((int)ViewBag.Counter++)%3 == 0)
+            {
+                <div class="col-xs-12"></div>
+            }
+            <div class="col-xs-2 col-xs-offset-2 col-xs-pull-1">
+                @Html.AnyDeviceBuilder(item.Value, (int)ViewBag.CurrentRoom )
+                @Html.ActionLink("Delete", "DeleteDevice", new { id = item.Value.Id, type = item.Value.GetType().ToString() }, new { @class = "btn btn-default btn-block" } )
+                @Html.ActionLink("Rename", "EditDevice", new { id = item.Value.Id, type = item.Value.GetType().ToString() }, new { @class = "btn btn-default btn-block" })
+            </div>
+        }
+    </div>
+</div>

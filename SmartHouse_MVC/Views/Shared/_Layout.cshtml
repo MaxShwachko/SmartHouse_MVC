@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart House</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="/Content/style.css" media="all">
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        @Html.ActionLink("Smart House", "RoomsList", "SmartHouse", new { area = "" }, new { @class = "navbar-brand" })
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p> @DateTime.Now.Year - Smart House</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="/Scripts/scripts.js"></script>
+
+</body>
+</html>

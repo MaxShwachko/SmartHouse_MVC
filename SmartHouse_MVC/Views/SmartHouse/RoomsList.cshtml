@@ -1,0 +1,20 @@
+﻿@model IEnumerable<SmartHouse_MVC.Models.Classes.Room>
+@using SmartHouse_MVC.Models.Classes;
+@using SmartHouse_MVC.Helpers;
+<p>
+    <hr />
+    @Html.ActionLink("Create New", "CreateRoom", null, new { @class = "btn btn-default btn-block" })
+</p>
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+        @foreach (var item in Model)
+        {
+            <div class="col-xs-2 col-xs-offset-2 col-xs-pull-1">
+                @Html.AnyRoomBuilder(item)
+                @Html.ActionLink("Rename", "EditRoom", new { id = item.Id }, new { @class = "btn btn-default btn-block" })
+                @Html.ActionLink("Delete", "DeleteRoom", new { id = item.Id }, new { @class = "btn btn-default btn-block" })
+            </div>
+        }
+    </div>
+</div>
+
