@@ -32,7 +32,7 @@ namespace SmartHouse_MVC.Models.Classes
             }
             catch (DbEntityValidationException ex)
             {
-                var sb = new StringBuilder();
+                var sb = new StringBuilder(); //
 
                 foreach (var failure in ex.EntityValidationErrors)
                 {
