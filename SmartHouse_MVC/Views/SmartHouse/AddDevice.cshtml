@@ -29,7 +29,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to list", "RoomInfo", new { id = Session["CurrentRoom"] })
 </div>
 
 @section Scripts {

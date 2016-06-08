@@ -48,7 +48,7 @@ namespace SmartHouse_MVC.Controllers
         [HttpGet]
         public ActionResult EditRoom(int id)
         {
-            Room room;
+            Room room = null;
             using (SmartHouseContext context = new SmartHouseContext())
             {
                 room = context.Rooms.FirstOrDefault(r => r.Id == id);
@@ -110,8 +110,15 @@ namespace SmartHouse_MVC.Controllers
         [HttpPost]
         public ActionResult AddDevice(string deviceType, string lampType, string Name)
         {
-            CreateNewDevice(deviceType, lampType, Name);
-            return RedirectToAction("RoomInfo", new { Id = Session["CurrentRoom"] });
+            if (Session["CurrentRoom"] != null)
+            {
+                CreateNewDevice(deviceType, lampType, Name);
+                return RedirectToAction("RoomInfo", new { Id = Session["CurrentRoom"] });
+            }
+            else
+            {
+                return new HttpStatusCodeResult(404);
+            }
         }
 
         [HttpGet]
@@ -122,8 +129,15 @@ namespace SmartHouse_MVC.Controllers
         [HttpPost]
         public ActionResult EditDevice(int id, string type, string name)
         {
-            RenameDevice(id, type, name);
-            return RedirectToAction("RoomInfo", new { Id = Session["CurrentRoom"] });
+            if (Session["CurrentRoom"] != null)
+            {
+                RenameDevice(id, type, name);
+                return RedirectToAction("RoomInfo", new { Id = Session["CurrentRoom"] });
+            }
+            else
+            {
+                return new HttpStatusCodeResult(404);
+            }
         }
 
         [HttpGet]
@@ -136,7 +150,14 @@ namespace SmartHouse_MVC.Controllers
         public ActionResult DeleteDevice(int id, string type, string name)
         {
             RemoveDevice(id, type);
-            return RedirectToAction("RoomInfo", new { Id = Session["CurrentRoom"] });
+            if (Session["CurrentRoom"] != null)
+            {
+                return RedirectToAction("RoomInfo", new { Id = Session["CurrentRoom"] });
+            }
+            else
+            {
+                return new HttpStatusCodeResult(404);
+            }
         }
 
 
